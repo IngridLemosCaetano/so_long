@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 09:31:30 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/08 20:55:59 by ingrid           ###   ########.fr       */
+/*   Created: 2025/12/08 20:27:06 by ingrid            #+#    #+#             */
+/*   Updated: 2025/12/08 21:12:14 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-int	main(int ac, char *av[])
+int	is_c_valid(char c)
 {
-	int		fd_map;
+	if (ft_strchr("01PEC", c) != NULL)
+		return (1);
+	else
+		return (0);
+}
 
-	if (ac == 2)
+void	init_checker(int *checker, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
 	{
-		fd_map = open(av[1], O_RDONLY);
-		if (fd_map < 0)
-			error_exit("no such file or directory");
-		is_map_valid(fd_map);
-		close(fd_map);
+		checker[i] = 0;
+		i++;
 	}
-	return (0);
 }

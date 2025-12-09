@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 09:31:30 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/08 20:55:59 by ingrid           ###   ########.fr       */
+/*   Created: 2025/12/08 11:23:12 by ingrid            #+#    #+#             */
+/*   Updated: 2025/12/08 14:28:16 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-int	main(int ac, char *av[])
+char	*error_exit(char *message)
 {
-	int		fd_map;
+	ft_printf("%s\n", message);
+	exit(1);
+}
 
-	if (ac == 2)
-	{
-		fd_map = open(av[1], O_RDONLY);
-		if (fd_map < 0)
-			error_exit("no such file or directory");
-		is_map_valid(fd_map);
-		close(fd_map);
-	}
+int	is_space(char c)
+{
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
 	return (0);
+}
+
+void	ft_free_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
