@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:23:12 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/08 14:28:16 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/09 14:45:49 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_space(char c)
 	return (0);
 }
 
-void	ft_free_array(char **arr)
+void	free_array(char **arr)
 {
 	int	i;
 

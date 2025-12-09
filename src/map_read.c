@@ -6,13 +6,13 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:30:49 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/08 21:12:00 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/09 16:59:30 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static void	has_minimum_items(char *line, int *checker)
+static void	count_map_chars(char *line, int *checker)
 {
 	int	i;
 
@@ -26,8 +26,10 @@ static void	has_minimum_items(char *line, int *checker)
 	}
 }
 
-static void	check_itens(int *checker)
+static void	check_itens(int *checker, int *rows)
 {
+	if (*rows == 0)
+		error_exit("Error: empty map.");
 	if (checker['P'] != 1)
 		error_exit("Error: map must contain exactly one player (P).");
 	if (checker['E'] != 1)
@@ -36,90 +38,64 @@ static void	check_itens(int *checker)
 		error_exit("Error: map must contain at least one collectible (C).");
 }
 
-static int	count_rows(int fd_map)
-{
-	int		rows;
-	char	*line;
-
-	rows = 0;
-	while ((line = get_next_line(fd_map)) != NULL)
-	{
-		rows++;
-		free(line);
-	}
-	return (rows);
-}
-
-char	**read_map(int fd_map, int *rows, int *cols)
+static char	**list_matrix(t_list *head, int rows)
 {
 	char	**matrix;
-	char	*line;
-	int		checker[256];
 	int		i;
-	int		x;
-	int		aux;
 
-	*cols = 0;
-	*rows = count_rows(fd_map);
-	if (*rows == 0)
-		error_exit("Error: empty map.");
-	matrix = malloc(sizeof(char *) * (*rows));
+	matrix = malloc(sizeof(char *) * (rows + 1));
 	if (!matrix)
 		error_exit("Error: malloc failed.");
-	init_checker(checker, 256);
 	i = 0;
-	while ((line = get_next_line(fd_map)) != NULL)
+	while (head)
 	{
-		has_minimum_items(line, checker);
-		x = 0;
-		while (line[x] && line[x] != '\n' && !is_space(line[x]))
-			x++;
-		aux = x;
-		if (i > 0 && *cols != aux)
-			error_exit("Error: invalid map (not rectangular).");
-		*cols = aux;
-		matrix[i] = ft_substr(line, 0, aux);
-		if (!matrix)
-			error_exit("Error: malloc failed.");
-		free(line);
+		matrix[i] = head->content;
+		head = head->next;
 		i++;
 	}
-	check_itens(checker);
+	matrix[i] = NULL;
 	return (matrix);
 }
 
-// static char	**is_matrix(int fd_map, int *cols, int *rows)
-// {
-// 	int		aux;
-// 	int		x;
-// 	char	*line;
-// 	int		checker[256];
-// 	char	**matrix = {0};
-// 	int		i;
+static void	process_map_line(char *line, t_map_info *info)
+{
+	t_list	*node;
+	int		len;
 
-// 	*cols = 0;
-// 	*rows = 0;
-// 	i = 0;
-// 	init_checker(checker, 256);
-// 	while ((line = get_next_line(fd_map)) != NULL)
-// 	{
-// 		has_minimum_items(line, checker);
-// 		matrix[i] = line;
-// 		x = 0;
-// 		while (line[x] && line[x] != '\n' && !is_space(line[x]))
-// 		{
-// 			if (!is_c_valid(line[x]))
-// 				error_exit("Error: map contains an invalid character.");
-// 			x++;
-// 		}
-// 		aux = x;
-// 		if (*rows > 0 && *cols != aux)
-// 			error_exit("Error: invalid map");
-// 		*cols = aux;
-// 		(*rows)++;
-// 		i++;
-// 		free(line);
-// 	}
+	len = 0;
+	while (line[len] && line[len] != '\n')
+		len++;
+	if (*info->rows == 0)
+		*info->cols = len;
+	else if (*info->cols != len)
+		error_exit("Error: invalid map (not rectangular).");
+	count_map_chars(line, info->checker);
+	node = ft_lstnew(line);
+	if (!node)
+		error_exit("Error: malloc failed.");
+	ft_lstadd_back(info->head, node);
+	(*info->rows)++;
+}
 
-// 	return (matrix);
-// }
+char	**read_map(int fd_map, int *rows, int *cols, t_list **head)
+{
+	char		*line;
+	int			checker[256];
+	t_map_info	info;
+
+	*rows = 0;
+	*cols = 0;
+	init_checker(checker, 256);
+	info.rows = rows;
+	info.cols = cols;
+	info.checker = checker;
+	info.head = head;
+	line = get_next_line(fd_map);
+	while (line != NULL)
+	{
+		process_map_line(line, &info);
+		line = get_next_line(fd_map);
+	}
+	check_itens(checker, rows);
+	return (list_matrix(*head, *rows));
+}

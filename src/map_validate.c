@@ -6,13 +6,13 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:03:40 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/08 20:53:07 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/09 15:20:36 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-int	has_walls_around(char **map, int rows, int cols)
+static int	has_walls_around(char **map, int rows, int cols)
 {
 	int	i;
 
@@ -33,21 +33,26 @@ int	has_walls_around(char **map, int rows, int cols)
 	return (1);
 }
 
-void	validate_map(char **map, int rows, int cols)
+static void	validate_map(char **map, int rows, int cols)
 {
-	if ((cols * rows) < 15 || cols == rows)
-		error_exit("Error: invalid map. Only rectangular maps are valid.");
+	if ((cols * rows) < 15)
+		error_exit("Error: invalid map.");
+	if (cols == rows)
+		error_exit("Error: invalid map (not rectangular).");
 	if (!has_walls_around(map, rows, cols))
 		error_exit("Error: the map is not surrounded by walls.");
 }
 
-void	is_map_valid(int fd_map)
+void	parse_and_validate_map(int fd_map)
 {
 	int		cols;
 	int		rows;
 	char	**map;
+	t_list	*head;
 
-	map = read_map(fd_map, &rows, &cols);
+	head = NULL;
+	map = read_map(fd_map, &rows, &cols, &head);
 	validate_map(map, rows, cols);
-	// depois você pode guardar matrix em t_game, ou dar free se não for usar
+	free_array(map);
+	free_list(&head);
 }

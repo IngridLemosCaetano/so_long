@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:27:06 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/08 21:12:14 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/09 15:18:10 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,19 @@ void	init_checker(int *checker, int size)
 	{
 		checker[i] = 0;
 		i++;
+	}
+}
+
+void	free_list(t_list **head)
+{
+	t_list	*temp;
+
+	if (!head)
+		return ;
+	while (*head)
+	{
+		temp = (*head)->next;
+		free(*head);
+		*head = temp;
 	}
 }
