@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:30:49 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/09 16:59:30 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/09 17:25:53 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char	**read_map(int fd_map, int *rows, int *cols, t_list **head)
 	char		*line;
 	int			checker[256];
 	t_map_info	info;
+	char		**list_line;
 
 	*rows = 0;
 	*cols = 0;
@@ -97,5 +98,6 @@ char	**read_map(int fd_map, int *rows, int *cols, t_list **head)
 		line = get_next_line(fd_map);
 	}
 	check_itens(checker, rows);
-	return (list_matrix(*head, *rows));
+	list_line = list_matrix(*head, *rows);
+	return (list_line);
 }

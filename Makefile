@@ -6,7 +6,7 @@
 #    By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 10:01:12 by ingrid            #+#    #+#              #
-#    Updated: 2025/12/03 10:08:31 by ingrid           ###   ########.fr        #
+#    Updated: 2025/12/10 10:42:49 by ingrid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)/inc
 
-SRCS = $(SRC_DIR)/so_long.c
+SRCS = $(SRC_DIR)/so_long.c $(SRC_DIR)/utils.c\
+		$(SRC_DIR)/map_validate.c $(SRC_DIR)/map_utils.c $(SRC_DIR)/map_read.c $(SRC_DIR)/map_dfs.c \
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
