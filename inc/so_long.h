@@ -6,17 +6,17 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 09:31:24 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/10 12:21:16 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/12 13:47:31 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "../lib/libft/inc/libft.h"
+# include "libft.h"
+# include "mlx.h"
 # include <sys/time.h>
 # include <math.h>
-# include <mlx.h>
 
 typedef struct s_map_info
 {
@@ -47,5 +47,10 @@ void	parse_and_validate_map(int fd_map);
 char	*error_exit(char *message);
 int		is_space(char c);
 void	free_array(char **arr);
+
+int		**alloc_visited(int rows, int cols);
+void	free_visited(int **matrix, int rows);
+
+void	init_window(void);
 
 #endif

@@ -6,18 +6,18 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 18:05:34 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/10 10:58:44 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/12 11:18:49 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static int	**alloc_visited(int rows, int cols)
+int	**alloc_visited(int rows, int cols)
 {
 	int	**matrix;
 	int	i;
 
-	matrix = (int **)malloc(sizeof(int *) * rows)
+	matrix = (int **)malloc(sizeof(int *) * rows);
 	if (!matrix)
 		return (NULL);
 	i = 0;
@@ -32,7 +32,7 @@ static int	**alloc_visited(int rows, int cols)
 	return (matrix);
 }
 
-static void	free_visited(int **matrix, int rows)
+void	free_visited(int **matrix, int rows)
 {
 	int	i ;
 
