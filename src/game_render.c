@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 21:51:38 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 00:48:56 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 16:48:47 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ static void	put_tile(t_game *g, char c, int x, int y)
 	mlx_put_image_to_window(g->mlx, g->win, img, x * TILE, y * TILE);
 }
 
+static void	draw_moves(t_game *g)
+{
+	char	*str;
+
+	str = ft_itoa(g->moves);
+	if (!str)
+		return ;
+	mlx_string_put(g->mlx, g->win, 8, 10, 0xFFFFFF, str);
+	free(str);
+}
+
 void	render_map(t_game *g)
 {
 	int	x;
@@ -46,4 +57,5 @@ void	render_map(t_game *g)
 		}
 		y++;
 	}
+	draw_moves(g);
 }

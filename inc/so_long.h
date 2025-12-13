@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 09:31:24 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 15:23:20 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 16:23:06 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_game
 	int		player_x;
 	int		player_y;
 	int		collected;
+	int		moves;
 }	t_game;
 
 //map_utils
@@ -79,7 +80,6 @@ void	render_map(t_game *g);
 int		handle_key(int keycode, t_game *g);
 int		handle_close(t_game *g);
 int		game_exit(t_game *g);
-
-void	free_map(t_map *m);
+void	move_player(t_game *g, int dx, int dy);
 
 #endif

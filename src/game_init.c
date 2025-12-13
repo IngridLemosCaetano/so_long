@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 20:58:43 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 01:04:21 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 15:59:44 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	game_init(t_game *g, int fd_map)
 			g->map.rows * TILE, "so_long");
 	load_images(g);
 	g->collected = 0;
+	g->moves = 0;
 	render_map(g);
 }

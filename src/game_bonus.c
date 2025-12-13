@@ -1,29 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_utils.c                                       :+:      :+:    :+:   */
+/*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 14:57:08 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 14:57:54 by ingrid           ###   ########.fr       */
+/*   Created: 2025/12/13 16:40:31 by ingrid            #+#    #+#             */
+/*   Updated: 2025/12/13 16:43:57 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+// #include "../inc/so_long.h"
 
-void	free_map(t_map *m)
-{
-	int	i;
 
-	if (!m->grid)
-		return ;
-	i = 0;
-	while (m->grid[i])
-	{
-		free(m->grid[i]);
-		i++;
-	}
-	free(m->grid);
-	m->grid = NULL;
-}

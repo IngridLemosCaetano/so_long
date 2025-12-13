@@ -6,7 +6,7 @@
 #    By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 10:01:12 by ingrid            #+#    #+#              #
-#    Updated: 2025/12/13 14:57:38 by ingrid           ###   ########.fr        #
+#    Updated: 2025/12/13 16:19:43 by ingrid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRCS = $(SRC_DIR)/so_long.c $(SRC_DIR)/utils.c\
 		$(SRC_DIR)/map_validate.c $(SRC_DIR)/map_utils.c \
 		$(SRC_DIR)/map_read.c $(SRC_DIR)/map_dfs.c \
 		$(SRC_DIR)/game_init.c $(SRC_DIR)/game_render.c \
-		$(SRC_DIR)/game_events.c $(SRC_DIR)/game_utils.c \
+		$(SRC_DIR)/game_events.c $(SRC_DIR)/game_move_player.c \
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
