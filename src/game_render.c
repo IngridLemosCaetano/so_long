@@ -37,7 +37,8 @@ static void	draw_moves(t_game *g)
 	str = ft_itoa(g->moves);
 	if (!str)
 		return ;
-	mlx_string_put(g->mlx, g->win, 8, 10, 0xFFFFFF, str);
+	mlx_string_put(g->mlx, g->win, 9, 11, 0x000000FF, str);
+	mlx_string_put(g->mlx, g->win, 8, 10, 0xFFFFFFFF, str);
 	free(str);
 }
 
