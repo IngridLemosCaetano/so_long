@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 09:31:24 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 16:23:06 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 19:02:07 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	validate_map(t_map *map);
 char	*error_exit(char *message);
 int		is_space(char c);
 void	free_array(char **arr);
+void	valid_path(char *path);
 
 //map_dfs
 int		**alloc_visited(int rows, int cols);

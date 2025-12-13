@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:23:12 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/10 11:14:11 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 20:23:47 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,15 @@ void	free_array(char **arr)
 		i++;
 	}
 	free(arr);
+}
+
+void	valid_path(char *path)
+{
+	int	len;
+
+	if (!path)
+		error_exit("Error: invalid file path.");
+	len = ft_strlen(path);
+	if(len < 4 || ft_strncmp(path + len - 4, ".ber", 4) != 0)
+		error_exit("Error: invalid file (.ber)");
 }
