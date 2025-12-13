@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 21:51:38 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/12 22:02:27 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 00:48:56 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ static void	put_tile(t_game *g, char c, int x, int y)
 		img = g->img.wall;
 	else if (c == 'P')
 		img = g->img.player;
-	else if (c = 'E')
+	else if (c == 'E')
 		img = g->img.exit;
 	else if (c == 'C')
 		img = g->img.collect;
+	if (!img)
+		return ;
 	mlx_put_image_to_window(g->mlx, g->win, img, x * TILE, y * TILE);
 }
 
@@ -37,9 +39,9 @@ void	render_map(t_game *g)
 	while (y < g->map.rows)
 	{
 		x = 0;
-		while (x < g->map.cols)
+		while (x < g->map.cols && g->map.grid[y][x])
 		{
-			put_tile(g, g->map.grid[x][y], x, y);
+			put_tile(g, g->map.grid[y][x], x, y);
 			x++;
 		}
 		y++;

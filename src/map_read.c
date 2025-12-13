@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:30:49 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/12 21:49:41 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/12 23:44:37 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ static char	**to_strv(t_list *head, int rows)
 	if (!map)
 		error_exit("Error: malloc failed.");
 	i = 0;
-	while (head)
+	while (head && i < rows)
 	{
-		map[i] = head->content;
+		map[i] = ft_strdup((char *)head->content);
+		if (!map[i])
+			error_exit("Error: malloc failed.");
 		head = head->next;
 		i++;
 	}

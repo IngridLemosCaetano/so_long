@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 09:31:30 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/12 21:48:14 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 01:36:54 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,21 @@
 int	main(int ac, char *av[])
 {
 	int		fd_map;
-	t_map	map;
+	t_game	g;
 
 	if (ac == 2)
 	{
 		fd_map = open(av[1], O_RDONLY);
 		if (fd_map < 0)
 			error_exit("Error: no such file or directory");
-		read_map(fd_map, &map);
-		validate_map(&map);
-		//gráfica
-		free_array(map.grid);
+		game_init(&g, fd_map);
+		mlx_key_hook(g.win, handle_key, &g);
+		mlx_hook(g.win, 17, 0, handle_close, &g);
+		mlx_loop(g.mlx);
+		free_array(g.map.grid);
 		close(fd_map);
 	}
 	else
 		error_exit("Error: no map file provided.");
 	return (0);
 }
-// mlx_put_image_to_window(mlx, mlx_win, player, 68, 68);
-// 	mlx_loop(mlx);

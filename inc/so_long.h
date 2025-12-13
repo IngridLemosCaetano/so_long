@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 09:31:24 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/12 21:52:22 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 01:26:52 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,11 @@ void	free_array(char **arr);
 int		**alloc_visited(int rows, int cols);
 void	free_visited(int **matrix, int rows);
 
-//game_init
-void	game_init(t_game *game, int fd_map)
-
-//game_render
+//game
+void	game_init(t_game *g, int fd_map);
+void	render_map(t_game *g);
+int		handle_key(int keycode, t_game *g);
+int		handle_close(t_game *g);
+int		game_exit(t_game *g);
 
 #endif
