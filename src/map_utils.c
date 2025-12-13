@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:27:06 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/09 15:18:10 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 14:27:26 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	free_list(t_list **head)
 	while (*head)
 	{
 		temp = (*head)->next;
+		free((*head)->content);
 		free(*head);
 		*head = temp;
 	}

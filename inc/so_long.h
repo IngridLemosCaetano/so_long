@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 09:31:24 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 01:26:52 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 15:23:20 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <math.h>
 
 # define TILE 68
+# define W 119
+# define S 115
+# define A 97
+# define D 100
 
 typedef struct s_map
 {
@@ -75,5 +79,7 @@ void	render_map(t_game *g);
 int		handle_key(int keycode, t_game *g);
 int		handle_close(t_game *g);
 int		game_exit(t_game *g);
+
+void	free_map(t_map *m);
 
 #endif
