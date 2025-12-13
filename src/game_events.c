@@ -1,36 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   game_events.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 09:31:30 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/12 21:48:14 by ingrid           ###   ########.fr       */
+/*   Created: 2025/12/12 22:04:49 by ingrid            #+#    #+#             */
+/*   Updated: 2025/12/12 22:05:39 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
-
-int	main(int ac, char *av[])
-{
-	int		fd_map;
-	t_map	map;
-
-	if (ac == 2)
-	{
-		fd_map = open(av[1], O_RDONLY);
-		if (fd_map < 0)
-			error_exit("Error: no such file or directory");
-		read_map(fd_map, &map);
-		validate_map(&map);
-		//gráfica
-		free_array(map.grid);
-		close(fd_map);
-	}
-	else
-		error_exit("Error: no map file provided.");
-	return (0);
-}
-// mlx_put_image_to_window(mlx, mlx_win, player, 68, 68);
-// 	mlx_loop(mlx);

@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:30:49 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/09 17:25:53 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/12 21:49:41 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,38 @@ static void	count_map_chars(char *line, int *checker)
 	}
 }
 
-static void	check_itens(int *checker, int *rows)
+static void	check_itens(t_map map)
 {
-	if (*rows == 0)
+	if (map.rows == 0)
 		error_exit("Error: empty map.");
-	if (checker['P'] != 1)
+	if (map.checker['P'] != 1)
 		error_exit("Error: map must contain exactly one player (P).");
-	if (checker['E'] != 1)
+	if (map.checker['E'] != 1)
 		error_exit("Error: map must contain exactly one exit (E).");
-	if (checker['C'] < 1)
+	if (map.checker['C'] < 1)
 		error_exit("Error: map must contain at least one collectible (C).");
 }
 
-static char	**list_matrix(t_list *head, int rows)
+static char	**to_strv(t_list *head, int rows)
 {
-	char	**matrix;
+	char	**map;
 	int		i;
 
-	matrix = malloc(sizeof(char *) * (rows + 1));
-	if (!matrix)
+	map = malloc(sizeof(char *) * (rows + 1));
+	if (!map)
 		error_exit("Error: malloc failed.");
 	i = 0;
 	while (head)
 	{
-		matrix[i] = head->content;
+		map[i] = head->content;
 		head = head->next;
 		i++;
 	}
-	matrix[i] = NULL;
-	return (matrix);
+	map[i] = NULL;
+	return (map);
 }
 
-static void	process_map_line(char *line, t_map_info *info)
+static void	process_map_line(char *line, t_map *map)
 {
 	t_list	*node;
 	int		len;
@@ -65,39 +65,34 @@ static void	process_map_line(char *line, t_map_info *info)
 	len = 0;
 	while (line[len] && line[len] != '\n')
 		len++;
-	if (*info->rows == 0)
-		*info->cols = len;
-	else if (*info->cols != len)
+	if (map->rows == 0)
+		map->cols = len;
+	else if (map->cols != len)
 		error_exit("Error: invalid map (not rectangular).");
-	count_map_chars(line, info->checker);
+	count_map_chars(line, map->checker);
 	node = ft_lstnew(line);
 	if (!node)
 		error_exit("Error: malloc failed.");
-	ft_lstadd_back(info->head, node);
-	(*info->rows)++;
+	ft_lstadd_back(&map->head, node);
+	map->rows++;
 }
 
-char	**read_map(int fd_map, int *rows, int *cols, t_list **head)
+void	read_map(int fd_map, t_map *map)
 {
-	char		*line;
-	int			checker[256];
-	t_map_info	info;
-	char		**list_line;
+	char	*line;
 
-	*rows = 0;
-	*cols = 0;
-	init_checker(checker, 256);
-	info.rows = rows;
-	info.cols = cols;
-	info.checker = checker;
-	info.head = head;
+	map->rows = 0;
+	map->cols = 0;
+	map->head = NULL;
+	init_checker(map->checker, 256);
 	line = get_next_line(fd_map);
 	while (line != NULL)
 	{
-		process_map_line(line, &info);
+		process_map_line(line, map);
 		line = get_next_line(fd_map);
 	}
-	check_itens(checker, rows);
-	list_line = list_matrix(*head, *rows);
-	return (list_line);
+	check_itens(*map);
+	map->grid = to_strv(map->head, map->rows);
+	free_list(&map->head);
+	map->head = NULL;
 }
