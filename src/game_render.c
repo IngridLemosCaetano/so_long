@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 21:51:38 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 16:48:47 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/14 11:22:57 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ static void	draw_moves(t_game *g)
 	str = ft_itoa(g->moves);
 	if (!str)
 		return ;
-	mlx_string_put(g->mlx, g->win, 9, 11, 0x000000FF, str);
-	mlx_string_put(g->mlx, g->win, 8, 10, 0xFFFFFFFF, str);
+	mlx_string_put(g->mlx, g->win, 9, 17, 0xFFFFFFFF, str);
+	mlx_string_put(g->mlx, g->win, 10, 19, 0x000000FF, str);
+	mlx_string_put(g->mlx, g->win, 9, 18, 0xFFFFFFFF, str);
 	free(str);
 }
 
