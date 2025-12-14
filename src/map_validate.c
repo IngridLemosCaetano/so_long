@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilemos-c <ilemos-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:03:40 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 21:49:10 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/14 17:54:02 by ilemos-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	validate_map(t_map *map)
 {
 	if ((map->cols * map->rows) < 15)
 		error_exit("Error: invalid map.");
-	if (map->cols == map->rows)
-		error_exit("Error: invalid map (not rectangular).");
 	if (!has_walls_around(map->grid, map->rows, map->cols))
 		error_exit("Error: the map is not surrounded by walls.");
 }
