@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 14:57:08 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 20:28:52 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/14 11:34:53 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	handle_exit_tile(t_game *g)
 	if (g->collected == g->map.checker['C'])
 	{
 		g->moves++;
+		ft_printf("Moves => %d\n", g->moves); // decidir se retiro
 		game_exit(g);
 	}
 	return (1);
@@ -40,6 +41,7 @@ static void	update_player_pos(t_game *g, int new_x, int new_y)
 static void	count_move_and_render(t_game *g)
 {
 	g->moves++;
+	ft_printf("Moves => %d\n", g->moves); // decidir se retiro
 	render_map(g);
 }
 
