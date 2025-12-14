@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:23:12 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 20:23:47 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 21:48:45 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void	valid_path(char *path)
 	if (!path)
 		error_exit("Error: invalid file path.");
 	len = ft_strlen(path);
-	if(len < 4 || ft_strncmp(path + len - 4, ".ber", 4) != 0)
+	if (len < 4 || ft_strncmp(path + len - 4, ".ber", 4) != 0)
 		error_exit("Error: invalid file (.ber)");
 }

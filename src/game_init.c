@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 20:58:43 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 20:08:52 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 21:48:55 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	game_init(t_game *g, int fd_map)
 	read_map(fd_map, &g->map);
 	validate_map(&g->map);
 	find_player(&g->map, &g->player_x, &g->player_y);
+	validate_path_map(g);
 	g->mlx = mlx_init();
 	g->win = mlx_new_window(g->mlx, g->map.cols * TILE,
 			g->map.rows * TILE, "so_long");

@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 09:31:24 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 19:02:07 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 21:46:33 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ typedef struct s_game
 	int		moves;
 }	t_game;
 
+typedef struct s_map_ctx
+{
+	char	**grid;
+	int		rows;
+	int		cols;
+}	t_map_ctx;
+
+typedef struct s_path_info
+{
+	int	reachable_c;
+	int	reachable_e;
+}	t_path_info;
+
 //map_utils
 int		is_c_valid(char c);
 void	init_checker(int *checker, int size);
@@ -64,6 +77,7 @@ void	read_map(int fd_map, t_map *map);
 
 //map_validate
 void	validate_map(t_map *map);
+void	validate_path_map(t_game *g);
 
 //utils
 char	*error_exit(char *message);

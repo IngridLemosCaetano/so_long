@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:03:40 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/12 20:43:38 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/13 21:49:10 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ static int	has_walls_around(char **map, int rows, int cols)
 	return (1);
 }
 
-// static void	validate_path(t_map *map)
-// {
-
-// }
-
 void	validate_map(t_map *map)
 {
 	if ((map->cols * map->rows) < 15)
@@ -46,4 +41,66 @@ void	validate_map(t_map *map)
 		error_exit("Error: invalid map (not rectangular).");
 	if (!has_walls_around(map->grid, map->rows, map->cols))
 		error_exit("Error: the map is not surrounded by walls.");
+}
+
+static char	**duplicate_grid(char **src, int rows)
+{
+	char	**dest;
+	int		i;
+
+	dest = malloc(sizeof(char *) * (rows + 1));
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (i < rows)
+	{
+		dest[i] = ft_strdup(src[i]);
+		if (!dest[i])
+			error_exit("Error: malloc failed.");
+		i++;
+	}
+	dest[i] = NULL;
+	return (dest);
+}
+
+static void	dfs(t_map_ctx *map_ctx, int x, int y, t_path_info *info)
+{
+	char	tile;
+
+	if (x < 0 || x >= map_ctx->cols || y < 0 || y >= map_ctx->rows)
+		return ;
+	tile = map_ctx->grid[y][x];
+	if (tile == '1' || tile == 'V')
+		return ;
+	if (tile == 'C')
+		info->reachable_c++;
+	if (tile == 'E')
+		info->reachable_e = 1;
+	map_ctx->grid[y][x] = 'V';
+	dfs(map_ctx, x + 1, y, info);
+	dfs(map_ctx, x - 1, y, info);
+	dfs(map_ctx, x, y + 1, info);
+	dfs(map_ctx, x, y - 1, info);
+}
+
+void	validate_path_map(t_game *g)
+{
+	t_map_ctx	ctx;
+	t_path_info	info;
+	char		**copy;
+
+	copy = duplicate_grid(g->map.grid, g->map.rows);
+	if (!copy)
+		error_exit("Error: malloc failed.");
+	ctx.grid = copy;
+	ctx.rows = g->map.rows;
+	ctx.cols = g->map.cols;
+	info.reachable_c = 0;
+	info.reachable_e = 0;
+	dfs(&ctx, g->player_x, g->player_y, &info);
+	free_array(copy);
+	if (info.reachable_c != g->map.checker['C'])
+		error_exit("Error: not all collectibles are reachable.");
+	if (info.reachable_e == 0)
+		error_exit("Error: exit is not reachable.");
 }
