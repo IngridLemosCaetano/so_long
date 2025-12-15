@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 21:51:38 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/14 11:22:57 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/15 14:40:34 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ static void	put_tile(t_game *g, char c, int x, int y)
 	else if (c == 'P')
 		img = g->img.player;
 	else if (c == 'E')
-		img = g->img.exit;
+	{
+		if (g->collected == g->map.checker['C'])
+			img = g->img.exit_open;
+		else
+			img = g->img.exit;
+	}
 	else if (c == 'C')
 		img = g->img.collect;
 	if (!img)

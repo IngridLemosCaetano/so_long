@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 20:58:43 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 23:49:22 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/15 14:44:07 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static void	load_images(t_game *g)
 			&w, &h);
 	g->img.player = mlx_xpm_file_to_image(g->mlx, "textures/player.xpm",
 			&w, &h);
-	g->img.exit = mlx_xpm_file_to_image(g->mlx, "textures/exit.xpm",
+	g->img.exit = mlx_xpm_file_to_image(g->mlx, "textures/exit_close.xpm",
+			&w, &h);
+	g->img.exit_open = mlx_xpm_file_to_image(g->mlx, "textures/exit_open.xpm",
 			&w, &h);
 	g->img.collect = mlx_xpm_file_to_image(g->mlx, "textures/collect.xpm",
 			&w, &h);
@@ -33,7 +35,7 @@ static void	load_images(t_game *g)
 		error_exit("Error: no such file xpm (floor)");
 	else if (!g->img.player)
 		error_exit("Error: no such file xpm (player)");
-	else if (!g->img.exit)
+	else if (!g->img.exit || !g->img.exit_open)
 		error_exit("Error: no such file xpm (exit)");
 	else if (!g->img.collect)
 		error_exit("Error: no such file xpm (collect)");

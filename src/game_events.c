@@ -6,7 +6,7 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 22:04:49 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/13 16:22:07 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/15 14:41:01 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	destroy_images(t_game *g)
 		mlx_destroy_image(g->mlx, g->img.player);
 	if (g->img.exit)
 		mlx_destroy_image(g->mlx, g->img.exit);
+	if (g->img.exit_open)
+		mlx_destroy_image(g->mlx, g->img.exit_open);
 	if (g->img.collect)
 		mlx_destroy_image(g->mlx, g->img.collect);
 }
