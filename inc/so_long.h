@@ -6,17 +6,15 @@
 /*   By: ingrid <ingrid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 09:31:24 by ingrid            #+#    #+#             */
-/*   Updated: 2025/12/15 14:34:43 by ingrid           ###   ########.fr       */
+/*   Updated: 2025/12/17 12:09:16 by ingrid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "libft.h"
-# include "mlx.h"
-# include <sys/time.h>
-# include <math.h>
+# include "../lib/libft/inc/libft.h"
+# include "../lib/mlx_linux/inc/mlx.h"
 
 # define TILE 68
 # define W 119
@@ -68,28 +66,36 @@ typedef struct s_path_info
 	int	reachable_e;
 }	t_path_info;
 
+//map_utils.c
 int		is_c_valid(char c);
 void	init_checker(int *checker, int size);
 void	free_list(t_list **head);
 
+//map_read.c
 void	read_map(int fd_map, t_map *map);
 
+//map_validate.c
 void	validate_map(t_map *map);
 void	validate_path_map(t_game *g);
 
+//utils.c
 char	*error_exit(char *message);
 int		is_space(char c);
 void	free_array(char **arr);
 void	valid_path(char *path);
 
-int		**alloc_visited(int rows, int cols);
-void	free_visited(int **matrix, int rows);
-
+//game_init.c
 void	game_init(t_game *g, int fd_map);
+
+//game_render.c
 void	render_map(t_game *g);
+
+//game_events.c
 int		handle_key(int keycode, t_game *g);
-int		handle_close(t_game *g);
 int		game_exit(t_game *g);
+int		handle_close(t_game *g);
+
+//game_move_player.c
 void	move_player(t_game *g, int dx, int dy);
 
 #endif
