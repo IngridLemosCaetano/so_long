@@ -3,9 +3,9 @@
 
 ## 💻 Sobre o projeto
 
-O <strong>so_long</strong> faz parte da grade da Escola 42. Ele é um projeto gráfico desenvolvido utilizando a biblioteca [MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx.html/). 
+O <strong>so_long</strong> faz parte da grade da Escola 42 (Milestone 2). Ele é um projeto gráfico desenvolvido utilizando a biblioteca [MiniLibX](https://github.com/42Paris/minilibx-linux).
 
-Nesse projeto temos que desenvolver um jogo 2D na Linguagem C, utilizando a [MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx.html/) (biblioteca disponibilizada pela escola). 
+Nesse projeto temos que desenvolver um jogo 2D na Linguagem C, utilizando a [MiniLibX](https://github.com/42Paris/minilibx-linux) (biblioteca disponibilizada pela escola). 
 
 O objetivo é mover o jogador pelo mapa, coletar todos os itens e alcançar a saída. Sempre respeitando as regras definidas pelo mapa e movimentações.
 
@@ -73,12 +73,23 @@ Caso alguma dessas regras não seja respeitada, o programa encerra exibindo uma 
 
 - Linguagem C
 
-- [MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx.html/) (X11) 
+- [MiniLibX](https://github.com/42Paris/minilibx-linux) ([Doc](https://harm-smits.github.io/42docs/libs/minilibx)) 
 
 - Linux
 
 - Makefile
 
+
+## 📁 Estrutura do Projeto
+
+so_long/ <br>
+├── inc/ # Headers <br>
+├── lib/ # Bibliotecas <br>
+├── maps/ # Mapas .ber <br>
+├── src/ # Código fonte <br>
+├── textures/ # Sprites e imagens (.xpm) <br>
+├── Makefile <br>
+└── README.md <br>
 
 ## ⚙️ Compilação
 
@@ -98,22 +109,12 @@ Caso alguma dessas regras não seja respeitada, o programa encerra exibindo uma 
 
 Após compilar, execute o programa passando o mapa como argumento:
 
-    ./so_long maps/mapa.ber
+    ./so_long ./maps/map_42.ber
 
 ## 🎮 Jogo 🕹️
 
 ![Web1](https://github.com/IngridLemosCaetano/so_long/blob/main/so_long.png)
 
-## 📁 Estrutura do Projeto
-
-so_long/ <br>
-├── inc/ # Headers <br>
-├── lib/ # Bibliotecas <br>
-├── maps/ # Mapas .ber <br>
-├── src/ # Código fonte <br>
-├── textures/ # Sprites e imagens (.xpm) <br>
-├── Makefile <br>
-└── README.md <br>
 
 ## 📌 Observações
 
@@ -132,4 +133,4 @@ Ingrid Lemos Caetano Silva
 👩‍💻 [GitHub](https://github.com/IngridLemosCaetano) | 💼 [Linkedin](https://br.linkedin.com/in/ingrid-lemos-caetano)
 
 
-![42](https://img.shields.io/badge/School-42-black?style=for-the-badge)
+![42](https://img.shields.io/badge/School-42-black)  ![42](https://img.shields.io/badge/42-so_long-blue)
